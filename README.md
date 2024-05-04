@@ -1,4 +1,4 @@
-# Local Llama Chat 🦙
+# Local Llama 3 Chat 🦙
 
 A simple chat interface to run the Llama 3 model locally using [OpenVINO Runtime](https://github.com/openvinotoolkit/openvino) for inference, transformers library for tokenization and Flask for the chat interface. 
 
