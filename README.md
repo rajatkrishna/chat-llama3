@@ -5,6 +5,7 @@ A simple chat interface to run the Llama 3 model locally using [OpenVINO Runtime
 - [Requirements](#requirements)
 - [Model Export](#model-export)
 - [Getting Started](#getting-started)
+- [Export from HuggingFace](#export-from-huggingface)
 
 
 ### Requirements
@@ -19,11 +20,40 @@ To download the original model weights from HuggingFace, visit the [HuggingFace 
 huggingface-cli login
 ```
 
-- To download the INT-4 quantized `meta-llama/Meta-Llama-3-8B-Instruct` model already converted to the OpenVINO IR format, you can use the following command:
+- For the INT-4 quantized `Meta-Llama-3-8B-Instruct` model already converted to the OpenVINO IR format from [HuggingFace](https://huggingface.co/rajatkrishna/Meta-Llama-3-8B-Instruct-OpenVINO-INT4), you can use the following command:
 
     ```
     huggingface-cli download rajatkrishna/Meta-Llama-3-8B-Instruct-OpenVINO-INT4 --local-dir models/llama-3-instruct-8b
     ```
+
+### Getting Started
+
+1. Clone the repository
+
+    ```
+    git clone https://github.com/rajatkrishna/llama3-openvino
+    ```
+
+2. Create a new virtual environment to avoid dependency conflicts:
+
+    ```
+    python3 -m venv create .env
+    source .env/bin/activate
+    ```
+
+3. Install the dependencies in `requirements.txt`
+
+    ```
+    pip install -r requirements.txt
+    ```
+
+4. Start the flask server from the project root using
+
+    ```
+    python3 -m flask run
+    ```
+
+### Export from HuggingFace
 
 - To export the [meta-llama/Meta-Llama-3-8B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) model quantized to **INT-8** format yourself using [optimum-intel](https://github.com/huggingface/optimum-intel) CLI, install the requirements in `requirements_export.txt`:
 
@@ -61,31 +91,4 @@ huggingface-cli login
         >>> tokenizer = AutoTokenizer.from_pretrained(model_name)
         >>> tokenizer.save_pretrained(export_path)
         ```
-
-### Getting Started
-
-1. Clone the repository
-
-    ```
-    git clone https://github.com/rajatkrishna/llama3-openvino
-    ```
-
-2. Create a new virtual environment to avoid dependency conflicts:
-
-    ```
-    python3 -m venv create .env
-    source .env/bin/activate
-    ```
-
-3. Install the dependencies in `requirements.txt`
-
-    ```
-    pip install -r requirements.txt
-    ```
-
-4. Start the flask server from the project root using
-
-    ```
-    python3 -m flask run
-    ```
 
