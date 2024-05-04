@@ -10,12 +10,10 @@ if __name__ == "__main__":
                         help="Model id in HuggingFace")
     parser.add_argument('--int8', type=bool, default=False,
                         help="Export in 8-bit format. Defaults to int4")
-    parser.add_argument('--ratio', type=float, default=None,
-                        help="Ratio of 4-bit vs 8-bit quantized layers")
-    parser.add_argument('--sym', type=bool, default=True,
-                        help="Symmetric or asymmetric quantization")
     parser.add_argument('--export-path', type=str,
                         help="Directory to export to")
+    sym = True
+    group_size = 128
     args = parser.parse_args()
 
     model_name = args.model_id if args.model_id else 'meta-llama/Meta-Llama-3-8B-Instruct'
@@ -28,8 +26,7 @@ if __name__ == "__main__":
             model_name, export=True, load_in_8bit=True)
     else:
         print("Loading in 4-bit")
-        q_config = OVWeightQuantizationConfig(
-            bits=4, sym=args.sym, group_size=128, ratio=args.ratio)
+        q_config = OVWeightQuantizationConfig(bits=4, sym=sym, group_size=group_size)
         model = OVModelForCausalLM.from_pretrained(
             model_name, export=True, quantization_config=q_config)
     time_to_export_sec = time.perf_counter() - start

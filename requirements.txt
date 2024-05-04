@@ -1,4 +1,6 @@
-openvino-nightly
+openvino==2024.1
 numpy
 transformers==4.38.0
 jinja2
+Flask==3.0.1
+flask-socketio
