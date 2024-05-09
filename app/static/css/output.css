@@ -722,6 +722,10 @@ video {
   overflow: auto;
 }
 
+.whitespace-pre-line {
+  white-space: pre-line;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }

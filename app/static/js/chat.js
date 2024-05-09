@@ -7,7 +7,7 @@ function Message(name, img, side, msg) {
 		    <div class="${side === "right" ? "text-right" : ""} text-gray-900 text-sm font-semibold leading-snug pb-1">${name}</div>
 		    <div class="px-3.5 py-2 shadow-md ${side === "right" ? "bg-stone-300 rounded-tr-none" : "bg-slate-400 rounded-tl-none"} rounded-lg justify-start items-center gap-3 inline-flex">
 
-		      <span class="text-gray-900 text-sm font-normal leading-snug">${msg}</span>
+		      <span class="whitespace-pre-line text-gray-900 text-sm font-normal leading-snug">${msg}</span>
 
 		    </div>
 		    <div class="${side === "left" ? "justify-end" : "justify-start"} items-center inline-flex mb-2.5">
