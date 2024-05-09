@@ -40,7 +40,6 @@ class LlamaAssistant():
                                  dtype=np.int64)
         position_ids = np.arange(0, input_ids.shape[1], dtype=np.int64)
         position_ids = np.expand_dims(position_ids, axis=0)
-        latency = 0
         output_tokens = []
         new_position_id = np.copy(position_ids[..., -1:])
         inputs = {"position_ids": position_ids}
@@ -54,7 +53,6 @@ class LlamaAssistant():
             inputs["beam_idx"] = next_beam_idx
 
             self.request.infer(inputs)
-            latency += time.perf_counter() - start
 
             logits = self.request.get_tensor("logits").data
             next_token = np.argmax(logits[:, -1], axis=1)[0].item()
@@ -68,6 +66,7 @@ class LlamaAssistant():
             input_ids = np.array([[next_token]], dtype=np.longlong)
 
             if socketobj:
+                latency = time.perf_counter() - start
                 socketobj.emit('tps_measure', len(output_tokens)/latency)
 
         return self.tokenizer.decode(output_tokens)
