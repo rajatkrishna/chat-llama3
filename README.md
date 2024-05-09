@@ -2,6 +2,12 @@
 
 A simple chat interface to run the Llama 3 model locally using [OpenVINO Runtime](https://github.com/openvinotoolkit/openvino) for inference, transformers library for tokenization and Flask for the chat interface. 
 
+<p align="center">
+    <img width="450" src="https://github.com/rajatkrishna/chat-llama3/assets/61770314/5a7778fc-2de0-4c8c-ab4f-09843c78a2f0">
+</p>
+
+<br />
+
 - [Quickstart with Docker](#quickstart-with-docker)
 - [Requirements](#requirements)
 - [Model Export](#model-export)
