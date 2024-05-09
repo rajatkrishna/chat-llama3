@@ -2,11 +2,31 @@
 
 A simple chat interface to run the Llama 3 model locally using [OpenVINO Runtime](https://github.com/openvinotoolkit/openvino) for inference, transformers library for tokenization and Flask for the chat interface. 
 
+- [Quickstart with Docker](#quickstart-with-docker)
 - [Requirements](#requirements)
 - [Model Export](#model-export)
 - [Getting Started](#getting-started)
 - [Export from HuggingFace](#export-from-huggingface)
 
+### Quickstart with Docker
+
+- [Install docker](https://docs.docker.com/engine/install/).
+
+- Build the docker image with the following command. The source files and model weights are pulled using git, requiring an active internet connection.
+
+    ```
+    docker build -t chat-llama .
+    ```
+
+    You can optionally pass the `--no-cache` flag to build with the latest upstream changes. 
+
+- Start the container using:
+
+    ```
+    docker run -p 5000:5000 chat-llama
+    ```
+
+    This should start the Flask dev server available on `http://localhost:5000`
 
 ### Requirements
 
@@ -91,4 +111,3 @@ huggingface-cli login
         >>> tokenizer = AutoTokenizer.from_pretrained(model_name)
         >>> tokenizer.save_pretrained(export_path)
         ```
-
