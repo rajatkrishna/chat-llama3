@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./app/**/*.{html,js}"
+    "./llama_assistant/**/*.{html,js}"
   ],
   theme: {
     extend: {},
