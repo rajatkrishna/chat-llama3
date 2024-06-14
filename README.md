@@ -1,6 +1,6 @@
 # Local Llama 3 Chat 🦙
 
-A simple chat interface to run the Llama 3 model locally using [OpenVINO Runtime](https://github.com/openvinotoolkit/openvino) for inference, transformers library for tokenization and Flask for the chat interface. 
+A simple chat application with LLama 3 using OpenVINO Runtime for inference and transformers library for tokenization.
 
 <p align="center">
     <img width="450" src="https://github.com/rajatkrishna/chat-llama3/assets/61770314/5a7778fc-2de0-4c8c-ab4f-09843c78a2f0">
@@ -8,11 +8,19 @@ A simple chat interface to run the Llama 3 model locally using [OpenVINO Runtime
 
 <br />
 
+- [Model Export](#model-export)
 - [Quickstart with Docker](#quickstart-with-docker)
 - [Requirements](#requirements)
-- [Model Export](#model-export)
 - [Getting Started](#getting-started)
 - [Export from HuggingFace](#export-from-huggingface)
+
+### Model Export
+
+Download the INT-4 quantized `Meta-Llama-3-8B-Instruct` model already converted to the OpenVINO IR format from [HuggingFace](https://huggingface.co/rajatkrishna/Meta-Llama-3-8B-Instruct-OpenVINO-INT4) using `huggingface-cli` with the following command:
+
+```
+huggingface-cli download rajatkrishna/Meta-Llama-3-8B-Instruct-OpenVINO-INT4 --local-dir models/llama-3-instruct-8b
+```
 
 ### Quickstart with Docker
 
@@ -24,12 +32,10 @@ A simple chat interface to run the Llama 3 model locally using [OpenVINO Runtime
     docker build -t chat-llama .
     ```
 
-    You can optionally pass the `--no-cache` flag to build with the latest upstream changes. 
-
-- Start the container using:
+- Mount the model directory and start the container using:
 
     ```
-    docker run -p 5000:5000 chat-llama
+    docker run -v $(pwd)/models:/chat-app/models -p 5000:5000 chat-llama
     ```
 
     This should start the Flask dev server available on `http://localhost:5000`
@@ -37,20 +43,6 @@ A simple chat interface to run the Llama 3 model locally using [OpenVINO Runtime
 ### Requirements
 
 - Python 3.11
-
-### Model Export
-
-To download the original model weights from HuggingFace, visit the [HuggingFace model page](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) and accept their License. Once your request has been accepted, use `huggingface-cli` to login to your HuggingFace account in your current runtime with the following command:
-
-```
-huggingface-cli login
-```
-
-- For the INT-4 quantized `Meta-Llama-3-8B-Instruct` model already converted to the OpenVINO IR format from [HuggingFace](https://huggingface.co/rajatkrishna/Meta-Llama-3-8B-Instruct-OpenVINO-INT4), you can use the following command:
-
-    ```
-    huggingface-cli download rajatkrishna/Meta-Llama-3-8B-Instruct-OpenVINO-INT4 --local-dir models/llama-3-instruct-8b
-    ```
 
 ### Getting Started
 
