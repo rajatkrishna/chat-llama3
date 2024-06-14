@@ -1,16 +1,15 @@
 from flask import render_template, session
-from app import app, socketio
-from app.assistant import LlamaAssistant
+from llama_assistant import app, socketio
+from llama_assistant.assistant import Assistant
 import os
-from app.prompts import SYS_PROMPT
+from llama_assistant.prompts import SYS_PROMPT
 
 
 def create_chat(model_dir: str, device: str = "CPU"):
-    return LlamaAssistant(model_dir=model_dir, device=device, sys_prompt=SYS_PROMPT)
+    return Assistant(model_dir=model_dir, device=device, sys_prompt=SYS_PROMPT)
 
 
-MODEL_DIR = os.environ.get(
-    "MODEL_DIR", "models/llama-3-instruct-8b")
+MODEL_DIR = os.environ.get("MODEL_DIR", "models/llama-3-instruct-8b")
 DEVICE = os.environ.get("DEVICE", "CPU")
 assistant = create_chat(MODEL_DIR, device=DEVICE)
 
