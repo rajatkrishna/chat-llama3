@@ -1,4 +1,4 @@
-openvino==2024.1
+openvino>=2024.1
 numpy
 transformers==4.38.0
 jinja2
