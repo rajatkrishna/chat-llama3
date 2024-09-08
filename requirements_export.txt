@@ -2,5 +2,5 @@ optimum-intel @ git+https://github.com/huggingface/optimum-intel@main
 openvino
 nncf
 huggingface_hub
-transformers==4.38.2
-torch==2.2.1
+transformers
+torch
