@@ -16,10 +16,10 @@ A simple chat application with LLama 3 using OpenVINO Runtime for inference and 
 
 ### Model Export
 
-Download the INT-4 quantized `Meta-Llama-3-8B-Instruct` model already converted to the OpenVINO IR format from [HuggingFace](https://huggingface.co/rajatkrishna/Meta-Llama-3-8B-Instruct-OpenVINO-INT4) using `huggingface-cli` with the following command:
+Download the INT-4 quantized `Meta-Llama-3.1-8B-Instruct` model already converted to the OpenVINO IR format from [HuggingFace](https://huggingface.co/rajatkrishna/Meta-Llama-3.1-8b-Instruct-OpenVINO-INT4) using `huggingface-cli` with the following command:
 
 ```
-huggingface-cli download rajatkrishna/Meta-Llama-3-8B-Instruct-OpenVINO-INT4 --local-dir models/llama-3-instruct-8b
+huggingface-cli download rajatkrishna/Meta-Llama-3.1-8b-Instruct-OpenVINO-INT4 --local-dir models/llama-3.1-instruct-8b
 ```
 
 ### Quickstart with Docker
@@ -73,7 +73,7 @@ huggingface-cli download rajatkrishna/Meta-Llama-3-8B-Instruct-OpenVINO-INT4 --l
 
 ### Export from HuggingFace
 
-- To export the [meta-llama/Meta-Llama-3-8B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct) model quantized to **INT-8** format yourself using [optimum-intel](https://github.com/huggingface/optimum-intel) CLI, install the requirements in `requirements_export.txt`:
+- To export the [meta-llama/Meta-Llama-3-8B-Instruct](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct) model quantized to **INT-8** format yourself using [optimum-intel](https://github.com/huggingface/optimum-intel) CLI, install the requirements in `requirements_export.txt`:
 
     ```
     pip install -r requirements_export.txt
@@ -82,7 +82,7 @@ huggingface-cli download rajatkrishna/Meta-Llama-3-8B-Instruct-OpenVINO-INT4 --l
     Then run the following from the project root:
 
     ```
-    optimum-cli export openvino --model meta-llama/Meta-Llama-3-8B-Instruct --weight-format int8 models/llama-3-instruct-8b
+    optimum-cli export openvino --model meta-llama/Meta-Llama-3.1-8B-Instruct --weight-format int4 models/llama-3.1-instruct-8b
     ```
 
 - Alternately, use the following steps to export the **INT-4** quantized model using the Python API:
@@ -97,7 +97,7 @@ huggingface-cli download rajatkrishna/Meta-Llama-3-8B-Instruct-OpenVINO-INT4 --l
     2. Load the model using `OVModelForCausalLM` class. Set `export=True` to export the model on the fly. 
 
         ```
-        >>> export_path = "models/llama-3-instruct-8b"
+        >>> export_path = "models/llama-3.1-instruct-8b"
         >>> q_config = OVWeightQuantizationConfig(bits=4, sym=True, group_size=128)
         >>> model = OVModelForCausalLM.from_pretrained(model_name, export=True, quantization_config=q_config)
         >>> model.save_pretrained(export_path)
